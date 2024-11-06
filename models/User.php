@@ -21,6 +21,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'email'],
             [['username', 'email'], 'unique'],
             [['password', 'confirmPassword'], 'string', 'min' => 6],
+            [['phone'], 'string', 'max' => 15],
             ['confirmPassword', 'compare', 'compareAttribute' => 'password', 'message' => "Passwords don't match"],
             [['password', 'confirmPassword'], 'required', 'on' => 'create'],
             [['password', 'confirmPassword'], 'safe', 'on' => 'update'],
@@ -30,8 +31,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['create'] = ['username', 'email', 'password', 'confirmPassword', 'role'];
-        $scenarios['update'] = ['username', 'email', 'password', 'confirmPassword', 'role'];
+        $scenarios['create'] = ['username', 'email', 'password', 'confirmPassword', 'role', 'phone'];
+        $scenarios['update'] = ['username', 'email', 'password', 'confirmPassword', 'role', 'phone'];
         return $scenarios;
     }
 

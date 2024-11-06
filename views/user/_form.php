@@ -9,5 +9,6 @@ echo $form->field($model, 'email')->textInput(['maxlength' => true]);
 echo $form->field($model, 'password')->passwordInput(['maxlength' => true]);
 echo $form->field($model, 'confirmPassword')->passwordInput(['maxlength' => true]);
 echo $form->field($model, 'role')->dropDownList(['admin' => 'Admin', 'user' => 'User']);
+echo $form->field($model, 'phone')->textInput(['maxlength' => 15]);
 echo Html::submitButton('Save', ['class' => 'btn btn-success']);
 ActiveForm::end();

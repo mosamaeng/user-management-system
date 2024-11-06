@@ -37,9 +37,12 @@ class UserController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => User::find()->where(['not', ['id' => Yii::$app->user->id]]),
+            'query' => User::find()
+            ->where(['not', ['id' => Yii::$app->user->id]])
+            ->andFilterWhere(['>=', 'created_at', Yii::$app->request->get('created_at_from')])
+            ->andFilterWhere(['<=', 'created_at', Yii::$app->request->get('created_at_to')]),
             'pagination' => [
-                'pageSize' => 10,
+            'pageSize' => 10,
             ],
         ]);
 
@@ -103,7 +106,7 @@ class UserController extends Controller
     protected function findModel($id)
     {
         $model = User::find()
-        ->select(['id', 'username', 'email', 'role', 'created_at', 'updated_at'])
+        ->select(['id', 'username', 'phone', 'email', 'role', 'created_at', 'updated_at'])
         ->where(['id' => $id])
         ->one();
 
